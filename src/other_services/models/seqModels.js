@@ -6,9 +6,8 @@ import sequelize from '../../sequelizeConnection';
 export class Info extends Model {
     id
     vejnavn
-    By
-    Postnummer
-
+    by
+    postnummer
 }
 
 Info.init({
@@ -39,20 +38,27 @@ export class User extends Model {
     id
     name
     lastname
-    Role
+    username
+    password
+    role
 }
 
 User.init({
-    id: {
+    Id: {
         type: Datatype.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    Name: {
         type: Datatype.STRING,
         allowNull: false
     },
-    lastname: {
+    Lastname: {
+        type: Datatype.STRING,
+        allowNull: false
+    },
+
+    Password: {
         type: Datatype.STRING,
         allowNull: false
     },
@@ -64,10 +70,6 @@ User.init({
     sequelize,
     modelName: 'User'
 });
-
-
-
-
 
 
 

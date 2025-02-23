@@ -6,8 +6,6 @@ const app = express();
 
 testDBConnection();
 
-console.log("Hello github");
-
 process.on('SIGINT', () => {
     logger.end();
     console.log('See ya later asshole');
