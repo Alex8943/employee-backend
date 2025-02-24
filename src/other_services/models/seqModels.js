@@ -1,31 +1,25 @@
-import { Datatype, Model } from 'sequelize';
-import sequelize from '../../sequelizeConnection';
-
+import { DataTypes, Model } from 'sequelize';
+import sequelize from "../../other_services/sequelizeConnection.js";
 
 // Model for class Info
-export class Info extends Model {
-    id
-    vejnavn
-    by
-    postnummer
-}
+export class Info extends Model {}
 
 Info.init({
     id: {
-        type: Datatype.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     vejnavn: {
-        type: Datatype.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
-    By: {
-        type: Datatype.STRING,
+    by: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    Postnummer: {
-        type: Datatype.INTEGER,
+    postnummer: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 }, {
@@ -34,36 +28,33 @@ Info.init({
 });
 
 // Model for class User
-export class User extends Model {
-    id
-    name
-    lastname
-    username
-    password
-    role
-}
+export class User extends Model {}
 
 User.init({
-    Id: {
-        type: Datatype.INTEGER,
+    id: {
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Name: {
-        type: Datatype.STRING,
+    name: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    Lastname: {
-        type: Datatype.STRING,
+    lastname: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-
-    Password: {
-        type: Datatype.STRING,
+    username: {  // Added missing field
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    Role: {
-        type: Datatype.STRING,
+    role: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 }, {
@@ -71,5 +62,4 @@ User.init({
     modelName: 'User'
 });
 
-
-
+export default { Info, User };

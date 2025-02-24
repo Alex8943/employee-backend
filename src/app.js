@@ -1,10 +1,13 @@
 import express from 'express';
 import {testDBConnection} from "./database/connection.js";
+import authRouter from "./routes/authRouter.js"
 import logger from "./other_services/winstonLogger.js";
 
 const app = express();
 
 testDBConnection();
+
+app.use(authRouter);
 
 process.on('SIGINT', () => {
     logger.end();

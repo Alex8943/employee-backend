@@ -1,32 +1,20 @@
-import { Sequelize } from "sequelize"; 
-import { config } from '../../config';
+import { Sequelize } from 'sequelize';
+import { config } from '../../config.js'; // Ensure correct path
 
+const dbConfig = config.dbConfig.mysql;
 
-const dbConfig = config.dbConfig;
 const sequelize = new Sequelize(
-    dbConfig.mysql.mysql_
-    ,{
-        host: dbConfig.mysql.mysql_host,
+    dbConfig.mysql_database,
+    dbConfig.mysql_user,
+    dbConfig.mysql_password,
+    {
+        host: dbConfig.mysql_host,
         dialect: 'mysql',
-        port: dbConfig.mysql.mysql_port,
-        dialectOptions: process.env.NODE_ENV === 'development' ? {} : {
-            ssl: {
-                require: true,
-                rejectUnauthorized: true,  // Enforce SSL only in production
-            }
-        }
+        port: dbConfig.mysql_port,
+        logging: false,
     }
 );
 
 
-export const sequelizeAuth = async () => {sequelize.authenticate()
-    .then(() => console.log('Connection has been established successfully.'))
-    .catch((error) => console.error('Unable to connect to the database:', error));
-};
-
-export const sequelizeSync = async () => {await sequelize.sync({ alter: true })
-    .then(() => console.log('Seq model synced with the database'))
-    .catch((error) => console.error('Error syncing models:', error));
-};
 
 export default sequelize;
